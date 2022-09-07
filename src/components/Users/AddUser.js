@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Card from "../../UI/Card";
+import Card from "../UI/Card";
 import styles from "./AddUser.module.css";
-import Button from "../../UI/Button";
+import Button from "../UI/Button";
 
-function AddUser() {
+function AddUser(props) {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
 
@@ -12,7 +12,7 @@ function AddUser() {
     if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0)
       return;
     if (+enteredAge < 1) return;
-    console.log(enteredUsername, enteredAge);
+    props.onAddUser(enteredUsername, enteredAge);
     setEnteredAge("");
     setEnteredUsername("");
   }
@@ -26,7 +26,7 @@ function AddUser() {
   }
 
   return (
-    <Card styles={styles.input}>
+    <Card className={styles.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">Username</label>
         <input
